@@ -16,6 +16,9 @@
     <Filter Include="ch02">
       <UniqueIdentifier>{eb2ac346-38d7-4cef-898e-034a496932e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ch05">
+      <UniqueIdentifier>{551cb560-a8f3-4c99-afea-00b222f551ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Example.cpp">
@@ -27,5 +30,10 @@
     <ClCompile Include="ch02_1.cpp">
       <Filter>ch02</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ch05_1.h">
+      <Filter>ch05</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
