@@ -12,7 +12,7 @@ typedef struct {
 	BYTE aa[5][5];
 }pp;
 pp var[12][8] = {};
-int nvar[8] = {};
+int nvar[12] = {};
 
 BYTE pc00[5][5] = { {1, 1, 1}, {1}, {1} };
 BYTE pc01[5][5] = { {2, 2}, {2}, {2, 2} };
