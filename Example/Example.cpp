@@ -1,6 +1,4 @@
-﻿// Example.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
-
+﻿/*
 #include <iostream>
 #include "ch05_1.h"
 #include<vector>
@@ -80,14 +78,149 @@ int main()
     //memset(&ff, 0, sizeof(fboard));
     //search(&ff);
 }
+*/
+//#include <iostream>
+//#include<algorithm>
+//
+//using namespace std;
+//
+//int main()
+//{
+//    int total_weight = 10;
+//    int w[6] = { 0,5,4,3,2,1 };
+//    int v[6] = { 0,1,2,3,4,5 };
+//    int cot[6] = { 0,1,2,1,2,1 };
+//    int dp[11] = { 0 };
+//    int path[6][11] = { 0 };
+//
+//    for (int i = 1; i <= 5; i++)
+//        for (int k = 1; k <= cot[i]; k++)
+//            for (int j = 10; j >= w[i]; j--)
+//                if (dp[j] < dp[j - w[i]] + v[i])
+//                {
+//                    dp[j] = dp[j - w[i]] + v[i];
+//                    path[i][j] = 1;
+//                }
+//
+//    int i = 5, j = 10;
+//    while (i > 0 && j > 0)
+//    {
+//        if (path[i][j] == 1 && cot[i])
+//        {
+//            cout << i << ' ';
+//            j -= w[i];
+//            cot[i]--;
+//        }
+//        else
+//            i--;
+//    }
+//    cout << endl;
+//
+//    cout << "总的价值为: " << dp[10] << endl;
+//    return 0;
+//}
 
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
 
-// 入门使用技巧: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
+
+/*
+题意：10000元，4种面值硬币，给出每种硬币的个数，问最多可以用多少个硬币组合成给定的总价格，输出方案。
+思路：就是完全背包需要输出方案，dp[j]表示总价格为j时最多可以有多少个硬币，但是需要维护一下硬币的个数，
+实际上在01背包中，我们对所有状态都更新了一次答案，这里我们等于是对4种硬币各跑一次背包，维护一下使用
+次数即可。used[j]表示总价格为j时用了多少个某个硬币。pre[j]记录方案，表示j出现更有的答案时是由哪个状态
+转移来的。
+最后遍历一下输出答案就好了。这里不能滚动数组来做，因为硬币不止1个，滚动只更新了一次答案。
+*/
+
+//#include<cstdio>
+//#include<cstring>
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//const int maxn = 10010;
+//const int INF = 0x3f3f3f3f;
+//
+////int used[maxn];
+//int dp[maxn];
+//int path[maxn];
+//int cnt[4];
+//int val[4] = { 1,5,10,25 };
+//
+//int main()
+//{
+//    //freopen("int.txt","r",stdin);
+//    while (1) {
+//        int n, sum = 0;
+//        scanf_s("%d", &n);
+//        vector<vector<int>>used(4, vector<int>(n + 1, 0));
+//        for (int i = 0; i < 4; i++) {
+//            scanf_s("%d", &cnt[i]);
+//            sum += cnt[i] * val[i];
+//        }
+//        memset(dp, -INF, sizeof(dp));
+//        memset(path, 0, sizeof(path));
+//        path[0] = -1;
+//        dp[0] = 0;
+//        if (!n && !sum)break;
+//        for (int i = 0; i < 4; i++) {
+//            for (int v = val[i]; v <= n; v++) {
+//                cout << "val[i]=" << val[i] << endl;
+//                cout << "v-val[i]=" << v - val[i] << endl;
+//                if (dp[v - val[i]] + 1 > dp[v] && dp[v - val[i]] >= 0 && used[i][v - val[i]] < cnt[i]) {
+//                    dp[v] = dp[v - val[i]] + 1;
+//                    used[i][v] = used[i][v - val[i]] + 1;
+//                    path[v] = v - val[i];
+//                }
+//            }
+//        }
+//        for (int i = 0; i < 4; i++) {
+//            for (int j = 0; j <= n; j++) {
+//                cout << used[i][j] << " ";
+//            }
+//            cout << endl;
+//        }
+//        int ans[100];
+//        memset(ans, 0, sizeof(ans));
+//        if (dp[n] < 0) {
+//            printf("Charlie cannot buy coffee.\n");
+//        }
+//        else {
+//            while (path[n] != -1) {
+//                ans[n - path[n]]++;
+//                n = path[n];
+//            }
+//            printf("Throw in %d cents, %d nickels, %d dimes, and %d quarters.\n", ans[val[0]], ans[val[1]], ans[val[2]], ans[val[3]]);
+//        }
+//    }
+//    return 0;
+//}
+
+//#include<bits/stdc++.h>
+#include<string>
+#include<iostream>
+using namespace std;
+
+const int v[] = { 1,2,5 };
+int num[3], res[9999], tmp[9999];
+
+int main() {
+    while (cin >> num[0] >> num[1] >> num[2]) {
+        if (!num[0] && !num[1] && !num[2]) break;
+        res[0] = 1;
+        int last = 0;
+        for (int i = 0; i < 3; ++i) {
+            memset(tmp, 0, sizeof tmp);
+            for (int j = 0; j <= num[i]; ++j)
+                for (int k = 0; k <= last; ++k)
+                    tmp[k + j * v[i]] += res[k];
+            memcpy(res, tmp, sizeof tmp);
+            last += num[i] * v[i];
+        }
+        for (int i = 0; i <= last + 1; ++i) if (!res[i]) {
+            printf("%d\n", i);
+            break;
+        }
+    }
+
+    return 0;
+}
